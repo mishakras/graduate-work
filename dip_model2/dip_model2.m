@@ -14,7 +14,7 @@ a7 = a71;
 a8 = a81;
 K = K1;
 options = odeset("MaxStep",10^-2);
-[t1,THR1] = ode45(@dip_func_model2,[0,t],[T;H;R],options);
+[t1,THR1] = dip_ode45(2, 0, @dip_func_model2,[0,t],[T;H;R],options);
 hold on
 title("Клетки опухоли, охотящиеся клетки, отдыхающие клетки от времени")
 plot(t1,THR1(:,1),"r",'DisplayName','Клетки опухоли');
@@ -22,7 +22,11 @@ xlabel('t')
 ylabel('T, H, R') 
 plot(t1,THR1(:,2),"k",'DisplayName','Охотящиеся клетки');
 plot(t1,THR1(:,3),"b",'DisplayName','Отдыхающие клетки');
-legend
+if a5 < 0.03
+legend('Location','NorthWest')
+else
+legend    
+end
 figure
 hold on
 plot(THR1(1,1),THR1(1,3),"ro");

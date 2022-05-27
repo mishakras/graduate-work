@@ -31,12 +31,12 @@ upr_0=upr_01;
 temp2=0;
 options = odeset("MaxStep",10^-2);  
 figure
-[t,TNL1] = dip_ode45(@dip_func_model_with_upr,[0,150],[1*10^1;1.1*10^5;1],options);
-[t,TNL2] = dip_ode45(@dip_func_model_with_upr,[0,150],[7*10^3;2.5*10^5;1],options);
-[t,TNL3] = dip_ode45(@dip_func_model_with_upr,[0,150],[1*10^2;1.6*10^5;1],options);
-[t,TNL4] = dip_ode45(@dip_func_model_with_upr,[0,150],[1*10^1;1*10^5;1],options);
-[t,TNL5] = dip_ode45(@dip_func_model_with_upr,[0,160],[1*10^2;1.5*10^5;1],options);
-[t,TNL6] = dip_ode45(@dip_func_model_with_upr,[0,165],[7*10^3;2.4*10^5;1],options);
+[t,TNL1] = dip_ode45(1, 1, @dip_func_model_with_upr,[0,150],[1*10^1;1.1*10^5;1],options);
+[t,TNL2] = dip_ode45(1, 1, @dip_func_model_with_upr,[0,150],[7*10^3;2.5*10^5;1],options);
+[t,TNL3] = dip_ode45(1, 1, @dip_func_model_with_upr,[0,150],[1*10^2;1.6*10^5;1],options);
+[t,TNL4] = dip_ode45(1, 1, @dip_func_model_with_upr,[0,150],[1*10^1;1*10^5;1],options);
+[t,TNL5] = dip_ode45(1, 1, @dip_func_model_with_upr,[0,160],[1*10^2;1.5*10^5;1],options);
+[t,TNL6] = dip_ode45(1, 1, @dip_func_model_with_upr,[0,165],[7*10^3;2.4*10^5;1],options);
 title("Клетки опухоли/стандартные имунные клетки")
 hold on
 xlabel('N') 

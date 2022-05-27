@@ -1,5 +1,5 @@
-function varargout = dip_ode45(ode,tspan,y0,options,varargin)
-global U_sum temp2
+function varargout = dip_ode45(ode, tspan,y0,options,varargin)
+global U_sum temp2 model upr
 %ODE45  Solve non-stiff differential equations, medium order method.
 %   [TOUT,YOUT] = ODE45(ODEFUN,TSPAN,Y0) with TSPAN = [T0 TFINAL] integrates 
 %   the system of differential equations y' = f(t,y) from time T0 to TFINAL 
@@ -513,14 +513,26 @@ while ~done
   end
   
   % Advance the integration one step.
-  temp2 = temp2+1;
-  U = dip_upr(ynew(1),ynew(2),ynew(3));
-  U_sum(temp2,1) = tnew;
-  U_sum(temp2,2) = U(1);
-  U_sum(temp2,3) = ynew(2)-dip_fi(ynew(1),ynew(3));
-  U_sum(temp2,4) = dip_fi(ynew(1),ynew(3));
-  U_sum(temp2,5) = dip_dfi(ynew(1),ynew(3));
-  U_sum(temp2,6) = U(2);
+  if upr
+      temp2 = temp2+1;
+      if model == 1
+        U = dip_upr(ynew(1),ynew(2),ynew(3));
+      else
+        U = dip_upr2(ynew(1),ynew(2),ynew(3));
+      end
+      U_sum(temp2,1) = tnew;
+      U_sum(temp2,2) = U(1);
+      if model == 1
+          U_sum(temp2,3) = ynew(2)-dip_fi(ynew(1),ynew(3));
+          U_sum(temp2,4) = dip_fi(ynew(1),ynew(3));
+          U_sum(temp2,5) = dip_dfi(ynew(1),ynew(3));
+      else
+          U_sum(temp2,3) = ynew(3)-dip_fi2(ynew(1),ynew(2));
+          U_sum(temp2,4) = dip_fi2(ynew(1),ynew(2));
+          U_sum(temp2,5) = dip_dfi2(ynew(1),ynew(2));
+      end
+      U_sum(temp2,6) = U(2);
+  end
   t = tnew;
   y = ynew;
   if normcontrol

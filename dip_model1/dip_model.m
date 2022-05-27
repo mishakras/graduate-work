@@ -23,7 +23,7 @@ d = d1;
 lambda = lambda1;
 s = s1;
 options = odeset("MaxStep",10^-2);  
-[t,TNL] = ode45(@dip_func_model,[0,t],[T;N;L],options);
+[t,TNL] = dip_ode45(1, 0, @dip_func_model,[0,t],[T;N;L],options);
 figure
 plot(t,TNL(:,1));
 title("Клетки опухоли от времени")

@@ -22,9 +22,9 @@ upr_value=upr_value1;
 upr_0=upr_01;
 temp2=0;
 options = odeset("MaxStep",10^-2);
-[t1,THR1] = dip_ode45_2(@dip_func_model_with_upr2,[0,60],[1.5;1;0.85],options);
-[t2,THR2] = dip_ode45_2(@dip_func_model_with_upr2,[0,60],[0.1;0.1;0.85],options);
-[t3,THR3] = dip_ode45_2(@dip_func_model_with_upr2,[0,60],[0.01;0.01;0.85],options);
+[t1,THR1] = dip_ode45(2, 1, @dip_func_model_with_upr2,[0,200],[1.5;1;0.85],options);
+[t2,THR2] = dip_ode45(2, 1, @dip_func_model_with_upr2,[0,80],[0.1;0.1;0.85],options);
+[t3,THR3] = dip_ode45(2, 1, @dip_func_model_with_upr2,[0,80],[0.01;0.01;0.85],options);
 figure
 hold on
 plot(THR1(1,1),THR1(1,3),"ro",'DisplayName','Начало траектории T=1;H=1;R=0.85');
@@ -39,7 +39,7 @@ plot(THR3(:,1),THR3(:,3),"k",'DisplayName','Траектория T=0.01;H=0.01;R
 title("Клетки опухоли, отдыхающие клетки")
 xlabel('T') 
 ylabel('R')
-legend
+legend('Location','NorthWest')
 figure
 hold on
 plot(THR1(1,1),THR1(1,2),"ro",'DisplayName','Начало траектории T=1;H=1;R=0.85');

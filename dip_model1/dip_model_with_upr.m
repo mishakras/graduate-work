@@ -30,7 +30,7 @@ upr_time=upr_time1;
 upr_value=upr_value1;
 upr_0=upr_01;
 options = odeset("MaxStep",10^-2); 
-[t,TNL] = dip_ode45(@dip_func_model_with_upr,[0,t1],[T;N;L],options);
+[t,TNL] = dip_ode45(1, 1, @dip_func_model_with_upr,[0,t1],[T;N;L],options);
 figure
 plot(t,TNL(:,1));
 title("Клетки опухоли от времени")
